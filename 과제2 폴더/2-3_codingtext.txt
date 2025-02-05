@@ -1,0 +1,59 @@
+2-3. 주사위게임
+
+//#include <string>
+#include <vector>
+#include <unordered_map> //Hash Map
+#include <algorithm>
+
+using namespace std;
+
+int solution(int a, int b, int c, int d) 
+{
+    unordered_map<int, int> freq;  
+    vector<int> score = {a, b, c, d};  
+    for (int num : score) freq[num]++; 
+
+    // 네 개가 같은 경우
+    if (freq.size() == 1) return 1111 * a;
+
+    // 세 개가 같은 경우 
+    for (auto& [num, count] : freq) {
+        if (count == 3) {
+            int p = num, q;
+            for (auto& [n, c] : freq) {
+                if (c == 1) q = n;
+            }
+            return (10 * p + q) * (10 * p + q);
+        }
+    }
+
+    // 두 개씩 같은 경우 
+    if (freq.size() == 2) 
+    {
+        vector<int> keys;
+        for (auto& [num, count] : freq) 
+        {
+            keys.push_back(num);
+        }
+        if (freq[keys[0]] == 2 && freq[keys[1]] == 2) 
+        {
+            return (keys[0] + keys[1]) * abs(keys[0] - keys[1]);
+        }
+    }
+
+    // 두 개만 같은 경우 
+    if (freq.size() == 3)
+    {
+        int p, q = 0, r = 0;
+        for (auto& [num, count] : freq)
+        {
+            if (count == 2) p = num; 
+            else if (q == 0) q = num; 
+            else r = num;             
+        }
+        return q * r; 
+    }
+
+    // 네 개가 다 다른 경우
+    return *min_element(score.begin(), score.end());
+}
