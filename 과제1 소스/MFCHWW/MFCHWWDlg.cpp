@@ -295,12 +295,12 @@ void CMFCHWWDlg::OnBnClickedButtonApply()
 	if (newRadius <= 0 || newRadius >= 100)
 	{
 		MessageBox(_T("반지름 값이 유효하지 않습니다! (1~99 사이 값을 입력하세요.)"), _T("입력 오류"), MB_OK | MB_ICONERROR);
-		return; // 적용 안 하고 종료
+		return; 
 	}
 	if (newThickness <= 0 || newThickness >= 20)
 	{
 		MessageBox(_T("선 두께 값이 유효하지 않습니다! (1~19 사이 값을 입력하세요.)"), _T("입력 오류"), MB_OK | MB_ICONERROR);
-		return; // 적용 안 하고 종료
+		return; 
 	}
 
 	//값이 정상적이면 적용
@@ -308,7 +308,7 @@ void CMFCHWWDlg::OnBnClickedButtonApply()
 	userThickness = newThickness;
 
 	UpdateRadiusAndThickness();
-	Invalidate(); // 화면 다시 그리기 
+	Invalidate();
 }
 #pragma endregion
 
@@ -354,8 +354,7 @@ UINT CMFCHWWDlg::RandomMoveThread(LPVOID pParam)
 		}
 
 		pDlg->CalculateCircle();  // 원 다시 계산
-		pDlg->Invalidate();  // 화면 다시 그리기
-
+		pDlg->Invalidate(); 
 		Sleep(500); //초당 2회 이동
 	}
 
@@ -364,7 +363,7 @@ UINT CMFCHWWDlg::RandomMoveThread(LPVOID pParam)
 #pragma endregion
 
 #pragma region [6] 원의 중심 및 반지름 계산
-// 원의 중심과 반지름을 계산하는 함수
+// 원의 중심과 반지름을 계산
 void CMFCHWWDlg::CalculateCircle()
 {
 	if (clickPoints.size() < 3) return;
@@ -419,14 +418,14 @@ void CMFCHWWDlg::UpdateRadiusAndThickness()
 	if (newRadius <= 0 || newRadius >= 100)
 	{
 		MessageBox(_T("반지름 값이 유효하지 않습니다! (1~99 사이 값을 입력하세요.)"), _T("입력 오류"), MB_OK | MB_ICONERROR);
-		return; // 잘못된 값이면 적용하지 않음
+		return; 
 	}
 
 	// 두께 값 검증
 	if (newThickness <= 0 || newThickness >= 20)
 	{
 		MessageBox(_T("선 두께 값이 유효하지 않습니다! (1~19 사이 값을 입력하세요.)"), _T("입력 오류"), MB_OK | MB_ICONERROR);
-		return; // 잘못된 값이면 적용하지 않음
+		return; 
 	}
 
 	// 값이 정상적이면 적용
