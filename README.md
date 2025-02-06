@@ -1,4 +1,4 @@
-# Glim S/W homework📝
+# Glim SW homework📝
 
 - **지원자**: 김윤아
 - **제출 기간**: ~2025년 2월 12일
